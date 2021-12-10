@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021.06.02 12:12:09.932.dproj,C:\Users\1\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\1\Documents\RAD Studio\Projects\FifteenGame.dproj</Transaction>
+    <Transaction>2021.06.02 12:12:09.937.dproj,C:\Users\1\Documents\RAD Studio\Projects\FifteenGame.dproj=C:\Users\1\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021.06.02 12:12:49.976.dproj,C:\Users\1\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\1\Documents\RAD Studio\Projects\FFifteenGame.dproj</Transaction>
+    <Transaction>2021.06.02 12:13:01.777.pas,C:\Users\1\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\1\Documents\RAD Studio\Projects\FifteenGameForm.pas</Transaction>
+    <Transaction>2021.06.02 12:13:01.777.dfm,C:\Users\1\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\1\Documents\RAD Studio\Projects\FifteenGameForm.dfm</Transaction>
+    <Transaction>2021.06.02 12:13:18.421.pas,C:\Users\1\Documents\RAD Studio\Projects\FifteenGameForm.pas=C:\Users\1\Desktop\FifteenGame\Форма программы\FifteenGameForm.pas</Transaction>
+    <Transaction>2021.06.02 12:13:18.421.dfm,C:\Users\1\Documents\RAD Studio\Projects\FifteenGameForm.dfm=C:\Users\1\Desktop\FifteenGame\Форма программы\FifteenGameForm.dfm</Transaction>
+    <Transaction>2021.06.02 12:13:20.283.dproj,C:\Users\1\Documents\RAD Studio\Projects\FFifteenGame.dproj=C:\Users\1\Desktop\FifteenGame\Форма программы\FFifteenGame.dproj</Transaction>
+    <Transaction>2021.06.02 12:13:25.947.dproj,C:\Users\1\Desktop\FifteenGame\Форма программы\FFifteenGame.dproj=C:\Users\1\Desktop\FifteenGame\Форма программы\FifteenGame.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
