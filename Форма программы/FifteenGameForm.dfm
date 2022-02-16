@@ -6,8 +6,8 @@ object Form1: TForm1
   Margins.Right = 4
   Margins.Bottom = 4
   Caption = 'Form1'
-  ClientHeight = 405
-  ClientWidth = 453
+  ClientHeight = 340
+  ClientWidth = 520
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -10496,13 +10496,14 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object MyFifteen1: TMyFifteen
-    Left = 29
-    Top = 56
-    Width = 276
-    Height = 281
+    Left = 0
+    Top = 0
+    Width = 520
+    Height = 340
     ColCount = 4
     RowCount = 4
     FifteenColor = clMenuHighlight
+    Align = alClient
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -10511,6 +10512,9 @@ object Form1: TForm1
     ParentFont = False
     PopupMenu = PopupMenu1
     OnVictory = MyFifteen1Victory
+    ExplicitLeft = 536
+    ExplicitWidth = 541
+    ExplicitHeight = 276
   end
   object Edit1: TEdit
     Left = 324

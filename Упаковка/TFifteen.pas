@@ -17,12 +17,12 @@ type
     fOnVictory: TNotifyEvent;
   protected
     procedure WMLButtonDown(var M: Tmessage); message wm_LButtonDown;
-    function GetColCount: integer;
+    //function GetColCount: integer;
     procedure SetColCount(Value: integer); virtual;
-    function GetRowCount: integer;
+    //function GetRowCount: integer;
     procedure SetRowCount(Value: integer); virtual;
-    function GetFifteenColor: TColor;
-    procedure SetFifteenColor(Value: TColor); virtual;
+    //function GetFifteenColor: TColor;
+    //procedure SetFifteenColor(Value: TColor); virtual;
     procedure Paint; override;
     procedure Move(CellCol, CellRow: integer); virtual;
     function Finish: boolean; virtual;
@@ -32,9 +32,9 @@ type
     procedure Recover; virtual;
     procedure Mixer; virtual;
   published
-    property ColCount:integer read GetColCount write SetColCount;
-    property RowCount:integer read GetRowCount write SetRowCount;
-    property FifteenColor:TColor read GetFifteenColor write SetFifteenColor;
+    property ColCount:integer read FColCount write SetColCount;
+    property RowCount:integer read FRowCount write SetRowCount;
+    property FifteenColor:TColor read FFifteenColor write FFifteenColor;
     property OnMouseMove;
     property Align;
     property Color;
@@ -73,10 +73,10 @@ begin
   Field[FRowCount-1, FColCount-1]:=0;
 end;
 
-function TMyFifteen.GetColCount: integer;
-begin
-  Result:=FColCount;
-end;
+//function TMyFifteen.GetColCount: integer;     //read
+//begin
+//  Result:=FColCount;
+//end;
 
 procedure TMyFifteen.SetColCount(Value: integer);
 begin
@@ -94,10 +94,10 @@ begin
   end;
 end;
 
-function TMyFifteen.GetRowCount: integer; //Зачем эта функция?
-begin                                     //Если нет проверок, то можно передавать через переменную.
-  Result:=FRowCount;
-end;
+//function TMyFifteen.GetRowCount: integer;    //read
+//begin
+//  Result:=FRowCount;
+//end;
 
 procedure TMyFifteen.SetRowCount(Value: integer);
 begin
@@ -115,19 +115,19 @@ begin
   end;
 end;
 
-function TMyFifteen.GetFifteenColor: TColor;
-begin
-  Result:=FFifteenColor;
-end;
+//function TMyFifteen.GetFifteenColor: TColor;    //read
+//begin
+//  Result:=FFifteenColor;
+//end;
 
-procedure TMyFifteen.SetFifteenColor(Value: TColor);
-begin
-  if (FFifteenColor <> Value) then
-  begin
-    FFifteenColor:=Value;
-    Refresh;
-  end;
-end;
+//procedure TMyFifteen.SetFifteenColor(Value: TColor);    //write
+//begin
+//  if (FFifteenColor <> Value) then
+//  begin
+//    FFifteenColor:=Value;
+//    Refresh;
+//  end;
+//end;
 
 // новая игра
 procedure TMyFifteen.Recover; 
@@ -151,8 +151,8 @@ var
   FifteenWidth, FifteenHeight: integer;
   FW, FH: integer;
 begin
-  //Проверка
-  if Finish = false then
+  //Проверка сбора пятнашек
+  if not(Finish) then
   begin
     // преобразование координаты мыши в координаты клетки
     if Width / FColCount > Height / FRowCount then
@@ -288,7 +288,7 @@ begin
         FifteenHeight:=Trunc(Width / FColCount * FRowCount);
       end;
 
-      // Нахождение координат по которым будут писоваться пятнашки
+      // Нахождение координат по которым будут описываться пятнашки
       x1:=(Width - FifteenWidth) div 2;
       y1:=(Height - FifteenHeight) div 2;
       x2:=(Width + FifteenWidth) div 2;
@@ -299,8 +299,9 @@ begin
 
       // Отрисовка ячеек
       // сетка: вертикальные линии
-      ColCnt:=FColCount;
-      while (ColCnt > 0) do
+//      ColCnt:=FColCount;         //Замена на for в качестве оптимизации
+//      while (ColCnt > 0) do
+      for ColCnt := FColCount downto 1 do
       begin
         FW:=x2-x1;
         ColSize:=FW div ColCnt;
@@ -308,14 +309,15 @@ begin
         LineTo(x1, y2);
         MoveTo(x1+ColSize-1, y1);
         LineTo(x1+ColSize-1, y2);
-        Dec(ColCnt);
+//        Dec(ColCnt);
         x1:=x1+ColSize;
       end;
 
       // сетка: горизонтальные линии
       x1:=(Width - FifteenWidth) div 2;
-      RowCnt:=FRowCount;
-      while (RowCnt > 0) do
+//      RowCnt:=FRowCount;           //Замена на for в качестве оптимизации
+//      while (RowCnt > 0) do
+      for RowCnt := FRowCount downto 1 do
       begin
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
@@ -323,28 +325,30 @@ begin
         LineTo(x2, y1);
         MoveTo(x1, y1+RowSize-1);
         LineTo(x2, y1+RowSize-1);
-        Dec(RowCnt);
+//        Dec(RowCnt);
         y1:=y1+RowSize;
       end;
 
       //Отрисовка содержимго клеток
       Brush.Style:=bsClear;    //Прозрачный фон
       i:=0;
-      RowCnt:=FRowCount;
+//      RowCnt:=FRowCount;
       y1:=(Height - FifteenHeight) div 2;
-      while (RowCnt > 0) do
+//      while (RowCnt > 0) do              //Замена на for в качестве оптимизации
+      for RowCnt := FRowCount downto 1 do
       begin
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
 
-        ColCnt:=FColCount;
+//        ColCnt:=FColCount;
         x1:=(Width - FifteenWidth) div 2;
         j:=0;
 
         Font.Height:=RowSize-2;
 
         y:=y1 + (RowSize - TextHeight(IntToStr(Field[i,j]))) div 2;
-        while (ColCnt > 0) do
+//        while (ColCnt > 0) do
+        for ColCnt := FColCount downto 1 do
         begin
           FW:=x2-x1;
           ColSize:=FW div ColCnt;
@@ -353,12 +357,12 @@ begin
           if (Field[i, j] <> 0) and (Font.Height >= 1) then
             TextOut(x,y,IntToStr(Field[i,j]));
 
-          Dec(ColCnt);
+//          Dec(ColCnt);
           x1:=x1+ColSize;
           Inc(j);
         end;
 
-        Dec(RowCnt);
+//        Dec(RowCnt);
         y1:=y1+RowSize;
         Inc(i);
       end;
@@ -374,7 +378,8 @@ end;
 procedure TMyFifteen.Mixer;
 var
   x1,y1: integer; // пустая клетка
-  x2,y2: integer; // эту переместить в пустую
+  x2,y2: integer;
+  oldx, oldy: integer; // предыдущее место пустой клетки
   rand: integer;     // направление, относительно пустой
   i: integer;
 begin
@@ -382,7 +387,7 @@ begin
   x1:=FColCount-1;
   y1:=FRowCount-1;
   randomize;
-  for i:= 0 to 300 do
+  for i:= 0 to 120 do
   begin
     repeat
       x2:=x1;
@@ -394,11 +399,13 @@ begin
         3: dec(y2);
         4: inc(y2);
       end;
-    until (x2>=0) and (x2<=FColCount-1) and (y2>= 0) and (y2<=FRowCount-1);
+    until (x2>=0) and (x2<=FColCount-1) and (y2>= 0) and (y2<=FRowCount-1) and not((x2 = oldx) and (y2 = oldy));
     // здесь определили фишку, которую
     // надо переместить в пустую клетку
     Field[y1,x1] := Field[y2,x2];
     Field[y2,x2] := 0;
+    oldx:=x1;
+    oldy:=y1;
     x1:=x2;
     y1:=y2;
   end;

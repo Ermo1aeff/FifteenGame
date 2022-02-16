@@ -65,6 +65,7 @@ procedure TForm1.Button1Click(Sender: TObject);
 begin
   MyFifteen1.FifteenColor:=StringToColor('clWindow');
   Edit1.Text:=ColorToString(MyFifteen1.FifteenColor);
+  Self.Caption := 'Пятнашки'
 end;
 
 procedure TForm1.MyFifteen1Victory(Sender: TObject);
@@ -105,7 +106,7 @@ end;
 
 procedure TForm1.N34Click(Sender: TObject);
 begin
-  MyFifteen1.ColCount:=4;
+  MyFifteen1.ColCount:=3;
   MyFifteen1.RowCount:=5;
 end;
 
