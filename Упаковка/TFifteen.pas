@@ -17,12 +17,8 @@ type
     fOnVictory: TNotifyEvent;
   protected
     procedure WMLButtonDown(var M: Tmessage); message wm_LButtonDown;
-    //function GetColCount: integer;
     procedure SetColCount(Value: integer); virtual;
-    //function GetRowCount: integer;
     procedure SetRowCount(Value: integer); virtual;
-    //function GetFifteenColor: TColor;
-    //procedure SetFifteenColor(Value: TColor); virtual;
     procedure Paint; override;
     procedure Move(CellCol, CellRow: integer); virtual;
     function Finish: boolean; virtual;
@@ -73,11 +69,6 @@ begin
   Field[FRowCount-1, FColCount-1]:=0;
 end;
 
-//function TMyFifteen.GetColCount: integer;     //read
-//begin
-//  Result:=FColCount;
-//end;
-
 procedure TMyFifteen.SetColCount(Value: integer);
 begin
   if (Value < 3) then
@@ -94,11 +85,6 @@ begin
   end;
 end;
 
-//function TMyFifteen.GetRowCount: integer;    //read
-//begin
-//  Result:=FRowCount;
-//end;
-
 procedure TMyFifteen.SetRowCount(Value: integer);
 begin
   if (Value < 3) then
@@ -114,20 +100,6 @@ begin
     Refresh;
   end;
 end;
-
-//function TMyFifteen.GetFifteenColor: TColor;    //read
-//begin
-//  Result:=FFifteenColor;
-//end;
-
-//procedure TMyFifteen.SetFifteenColor(Value: TColor);    //write
-//begin
-//  if (FFifteenColor <> Value) then
-//  begin
-//    FFifteenColor:=Value;
-//    Refresh;
-//  end;
-//end;
 
 // новая игра
 procedure TMyFifteen.Recover; 
@@ -299,8 +271,6 @@ begin
 
       // Отрисовка ячеек
       // сетка: вертикальные линии
-//      ColCnt:=FColCount;         //Замена на for в качестве оптимизации
-//      while (ColCnt > 0) do
       for ColCnt := FColCount downto 1 do
       begin
         FW:=x2-x1;
@@ -315,8 +285,6 @@ begin
 
       // сетка: горизонтальные линии
       x1:=(Width - FifteenWidth) div 2;
-//      RowCnt:=FRowCount;           //Замена на for в качестве оптимизации
-//      while (RowCnt > 0) do
       for RowCnt := FRowCount downto 1 do
       begin
         FH:=y2-y1;
@@ -325,29 +293,24 @@ begin
         LineTo(x2, y1);
         MoveTo(x1, y1+RowSize-1);
         LineTo(x2, y1+RowSize-1);
-//        Dec(RowCnt);
         y1:=y1+RowSize;
       end;
 
       //Отрисовка содержимго клеток
       Brush.Style:=bsClear;    //Прозрачный фон
       i:=0;
-//      RowCnt:=FRowCount;
       y1:=(Height - FifteenHeight) div 2;
-//      while (RowCnt > 0) do              //Замена на for в качестве оптимизации
       for RowCnt := FRowCount downto 1 do
       begin
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
 
-//        ColCnt:=FColCount;
         x1:=(Width - FifteenWidth) div 2;
         j:=0;
 
         Font.Height:=RowSize-2;
 
         y:=y1 + (RowSize - TextHeight(IntToStr(Field[i,j]))) div 2;
-//        while (ColCnt > 0) do
         for ColCnt := FColCount downto 1 do
         begin
           FW:=x2-x1;
@@ -357,12 +320,10 @@ begin
           if (Field[i, j] <> 0) and (Font.Height >= 1) then
             TextOut(x,y,IntToStr(Field[i,j]));
 
-//          Dec(ColCnt);
           x1:=x1+ColSize;
           Inc(j);
         end;
 
-//        Dec(RowCnt);
         y1:=y1+RowSize;
         Inc(i);
       end;
