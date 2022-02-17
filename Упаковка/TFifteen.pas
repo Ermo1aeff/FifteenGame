@@ -27,6 +27,7 @@ type
     constructor Create(AOwner: TComponent); override;
     procedure Recover; virtual;
     procedure Mixer; virtual;
+    procedure Filler; virtual;
   published
     property ColCount:integer read FColCount write SetColCount;
     property RowCount:integer read FRowCount write SetRowCount;
@@ -53,7 +54,6 @@ procedure Register;
 implementation
 
 constructor TMyFifteen.Create(AOwner: TComponent);
-var i, j: integer;
 begin
   inherited Create(AOwner);
   FRowCount:= 4;
@@ -63,10 +63,7 @@ begin
   Height:=FRowCount*RowSize;
   Width:= FColCount*ColSize;
   FFifteenColor:=clWindow;
-  for i:=0 to FRowCount-1 do
-    for j:=0 to FColCount-1 do
-      Field[i,j] := j+1+i*FColCount;
-  Field[FRowCount-1, FColCount-1]:=0;
+  Filler;
 end;
 
 procedure TMyFifteen.SetColCount(Value: integer);
@@ -102,16 +99,22 @@ begin
 end;
 
 // новая игра
-procedure TMyFifteen.Recover; 
+procedure TMyFifteen.Recover;
+begin
+  // исходное положение
+  Filler;
+  Paint;
+end;
+
+procedure TMyFifteen.Filler;
 var
   i,j: integer;
 begin
-  // исходное (правильное) положение
+  // исходное положение
   for i:=0 to FRowCount-1 do
     for j:=0 to FColCount-1 do
       Field[i,j] := j+1+i*FColCount;
   Field[FRowCount-1, FColCount-1]:=0;
-  Paint; // отобразить поле
 end;
 
 // Клик по компоненту
@@ -146,22 +149,20 @@ begin
     if (M.LParamLo >= x1) and (M.LParamLo <= x2)
     and (M.LParamHi >= y1) and (M.LParamHi <= y2) then
     begin
-      ColCnt:=FColCount;
-      while (ColCnt > 0) and (M.LParamLo >= x1) do
+      for ColCnt := FColCount downto 1 do
       begin
+        if M.LParamLo < x1 then Break;
         FW:=x2-x1;
         ColSize:=FW div ColCnt;
-        Dec(ColCnt);
         x1:=x1+ColSize;
       end;
       CellCol:=FColCount-ColCnt-1;
 
-      RowCnt:=FRowCount;
-      while (RowCnt > 0) and (M.LParamHi >= y1) do
+      for RowCnt := FRowCount downto 1 do
       begin
+        if M.LParamHi < y1 then Break;
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
-        Dec(RowCnt);
         y1:=y1+RowSize;
       end;
       CellRow:=FRowCount-RowCnt-1;
@@ -279,7 +280,6 @@ begin
         LineTo(x1, y2);
         MoveTo(x1+ColSize-1, y1);
         LineTo(x1+ColSize-1, y2);
-//        Dec(ColCnt);
         x1:=x1+ColSize;
       end;
 
@@ -304,30 +304,23 @@ begin
       begin
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
-
-        x1:=(Width - FifteenWidth) div 2;
+        x1:=(Width - FifteenWidth) div 2; //Восстанавление коориднаты нач. пятн.
         j:=0;
-
         Font.Height:=RowSize-2;
-
         y:=y1 + (RowSize - TextHeight(IntToStr(Field[i,j]))) div 2;
         for ColCnt := FColCount downto 1 do
         begin
           FW:=x2-x1;
           ColSize:=FW div ColCnt;
-          
           x:=x1 + (ColSize - TextWidth(IntToStr(Field[i,j]))) div 2;
           if (Field[i, j] <> 0) and (Font.Height >= 1) then
             TextOut(x,y,IntToStr(Field[i,j]));
-
           x1:=x1+ColSize;
           Inc(j);
         end;
-
         y1:=y1+RowSize;
         Inc(i);
       end;
-
     end;
     Canvas.CopyRect(ClientRect, Image.Canvas, ClientRect);
   finally
@@ -344,10 +337,12 @@ var
   rand: integer;     // направление, относительно пустой
   i: integer;
 begin
-  Recover;
+  Filler;
   x1:=FColCount-1;
   y1:=FRowCount-1;
   randomize;
+  oldx:=0;
+  oldy:=0;
   for i:= 0 to 120 do
   begin
     repeat
@@ -378,7 +373,7 @@ end;
 
 procedure Register;
 begin
-   RegisterComponents('Test', [TMyFifteen]);
+   RegisterComponents('My Projects', [TMyFifteen]);
 end;
 
 end.

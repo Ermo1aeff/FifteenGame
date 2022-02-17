@@ -6,8 +6,8 @@ object Form1: TForm1
   Margins.Right = 4
   Margins.Bottom = 4
   Caption = 'Form1'
-  ClientHeight = 340
-  ClientWidth = 520
+  ClientHeight = 400
+  ClientWidth = 400
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -10498,8 +10498,8 @@ object Form1: TForm1
   object MyFifteen1: TMyFifteen
     Left = 0
     Top = 0
-    Width = 520
-    Height = 340
+    Width = 400
+    Height = 400
     ColCount = 4
     RowCount = 4
     FifteenColor = clMenuHighlight
@@ -10517,15 +10517,15 @@ object Form1: TForm1
     ExplicitHeight = 276
   end
   object Edit1: TEdit
-    Left = 324
-    Top = 96
+    Left = 260
+    Top = 88
     Width = 121
     Height = 21
     TabOrder = 0
   end
   object Button1: TButton
-    Left = 344
-    Top = 136
+    Left = 280
+    Top = 128
     Width = 75
     Height = 25
     Caption = 'Button1'
@@ -10533,7 +10533,7 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object MainMenu1: TMainMenu
-    Left = 360
+    Left = 304
     Top = 200
     object Ds1: TMenuItem
       Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077
@@ -10600,7 +10600,7 @@ object Form1: TForm1
     end
   end
   object PopupMenu1: TPopupMenu
-    Left = 392
+    Left = 344
     Top = 200
     object N5: TMenuItem
       Caption = #1055#1077#1088#1077#1084#1077#1096#1072#1090#1100

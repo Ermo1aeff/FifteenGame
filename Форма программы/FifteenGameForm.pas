@@ -63,9 +63,11 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  MyFifteen1.FifteenColor:=StringToColor('clWindow');
+//  MyFifteen1.FifteenColor:=StringToColor('clWindow');
   Edit1.Text:=ColorToString(MyFifteen1.FifteenColor);
-  Self.Caption := 'Пятнашки'
+  Self.Caption := 'Пятнашки';
+  Self.Color := RGB(random(127),random(127),random(127));
+  MyFifteen1.FifteenColor:= RGB(random(127),random(127),random(127));
 end;
 
 procedure TForm1.MyFifteen1Victory(Sender: TObject);
