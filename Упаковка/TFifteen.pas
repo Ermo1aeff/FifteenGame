@@ -77,7 +77,7 @@ begin
   if (value <> FColCount) then
   begin
     FColCount:=Value;
-    Recover;
+    Filler;
     Refresh;
   end;
 end;
@@ -93,7 +93,7 @@ begin
   if (value <> FRowCount) then
   begin
     FRowCount:=Value;
-    Recover;
+    Filler;
     Refresh;
   end;
 end;
@@ -101,16 +101,14 @@ end;
 // нова€ игра
 procedure TMyFifteen.Recover;
 begin
-  // исходное положение
   Filler;
   Paint;
 end;
 
-procedure TMyFifteen.Filler;
+procedure TMyFifteen.Filler; //»сходное положение
 var
   i,j: integer;
 begin
-  // исходное положение
   for i:=0 to FRowCount-1 do
     for j:=0 to FColCount-1 do
       Field[i,j] := j+1+i*FColCount;
@@ -126,8 +124,7 @@ var
   FifteenWidth, FifteenHeight: integer;
   FW, FH: integer;
 begin
-  //ѕроверка сбора п€тнашек
-  if not(Finish) then
+  if not(Finish) then  //ѕроверка сбора п€тнашек
   begin
     // преобразование координаты мыши в координаты клетки
     if Width / FColCount > Height / FRowCount then
@@ -190,15 +187,14 @@ begin
       fOnVictory(self);
 end;
 
-// провер€ет, расположены ли
-// фишки в нужном пор€дке
+// проверка рассположени€ кост€шек в нужном пор€дке
 function TMyFifteen.Finish: Boolean;
 var
   Row, Col: integer;
   i: integer;
 begin
   Row :=0; Col :=0;
-  Finish := True; // пусть фишки в нужном пор€дке
+  Finish := True; // пусть кост€шки в нужном пор€дке
   for i:=1 to FRowCount*FColCount-1 do
   begin
     if Field[Row,Col] <> i then
@@ -224,8 +220,7 @@ begin
   inherited SetBounds(ALeft, ATop, AWidth, AHeight);
 end;
 
-// выводит игровое поле
-procedure TMyFifteen.Paint;
+procedure TMyFifteen.Paint;  // ќтрисовка компонента
 var
   Image:TBitmap;
   i, j: integer; // Ќомер €чейки массива
@@ -341,8 +336,8 @@ begin
   x1:=FColCount-1;
   y1:=FRowCount-1;
   randomize;
-  oldx:=0;
-  oldy:=0;
+  oldx:=-1;
+  oldy:=-1;
   for i:= 0 to 120 do
   begin
     repeat
@@ -355,9 +350,8 @@ begin
         3: dec(y2);
         4: inc(y2);
       end;
-    until (x2>=0) and (x2<=FColCount-1) and (y2>= 0) and (y2<=FRowCount-1) and not((x2 = oldx) and (y2 = oldy));
-    // здесь определили фишку, которую
-    // надо переместить в пустую клетку
+    until (x2>=0) and (x2<=FColCount-1) and (y2>= 0) and (y2<=FRowCount-1) // ѕроверка границ
+     and not((x2 = oldx) and (y2 = oldy));  //ѕроверка предудущего положени€
     Field[y1,x1] := Field[y2,x2];
     Field[y2,x2] := 0;
     oldx:=x1;

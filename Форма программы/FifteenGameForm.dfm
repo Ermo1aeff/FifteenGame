@@ -10512,9 +10512,10 @@ object Form1: TForm1
     ParentFont = False
     PopupMenu = PopupMenu1
     OnVictory = MyFifteen1Victory
-    ExplicitLeft = 536
-    ExplicitWidth = 541
-    ExplicitHeight = 276
+    ExplicitLeft = -8
+    ExplicitTop = -8
+    ExplicitWidth = 441
+    ExplicitHeight = 321
   end
   object Edit1: TEdit
     Left = 260
