@@ -6,7 +6,7 @@ object Form1: TForm1
   Margins.Right = 4
   Margins.Bottom = 4
   Caption = #1055#1103#1090#1085#1072#1096#1082#1080
-  ClientHeight = 400
+  ClientHeight = 420
   ClientWidth = 449
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
@@ -15496,7 +15496,7 @@ object Form1: TForm1
     Left = 0
     Top = 27
     Width = 449
-    Height = 373
+    Height = 393
     ColCount = 4
     RowCount = 4
     FifteenColor = clMenuHighlight
@@ -15512,8 +15512,7 @@ object Form1: TForm1
     ShowHint = True
     OnVictory = MyFifteen1Victory
     OnTilesMove = MyFifteen1TilesMove
-    ExplicitTop = 30
-    ExplicitWidth = 460
+    ExplicitTop = 26
   end
   object ControlBar1: TControlBar
     Left = 0
@@ -15644,6 +15643,10 @@ object Form1: TForm1
         Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1096#1088#1080#1092#1090
         OnClick = N8Click
       end
+      object N10: TMenuItem
+        Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1094#1074#1077#1090' '#1092#1086#1085#1072
+        OnClick = N10Click
+      end
     end
     object N4: TMenuItem
       Caption = #1042#1099#1081#1090#1080
@@ -15656,6 +15659,10 @@ object Form1: TForm1
     object N5: TMenuItem
       Caption = #1055#1077#1088#1077#1084#1077#1096#1072#1090#1100
       OnClick = N5Click
+    end
+    object N9: TMenuItem
+      Caption = #1047#1072#1092#1080#1082#1089#1080#1088#1086#1074#1072#1090#1100' '#1085#1072' '#1086#1082#1085#1077
+      OnClick = N9Click
     end
   end
   object Timer1: TTimer

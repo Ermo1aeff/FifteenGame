@@ -18,7 +18,7 @@ type
     fOnTilesMove: TNotifyEvent;
     fOnClick: TNotifyEvent;
   protected
-    procedure WMLButtonDown(var M: Tmessage); message wm_LButtonDown;
+    procedure WMLButtonDown(var Message: TMessage); message WM_LBUTTONDOWN;
     procedure SetColCount(Value: integer); virtual;
     procedure SetRowCount(Value: integer); virtual;
     procedure SetFifteenColor(Value: TColor); virtual;
@@ -35,7 +35,6 @@ type
     property ColCount:integer read FColCount write SetColCount;
     property RowCount:integer read FRowCount write SetRowCount;
     property FifteenColor:TColor read FFifteenColor write SetFifteenColor;
-    property OnMouseMove;
     property Align;
     property Color;
     property ParentColor;
@@ -49,7 +48,28 @@ type
     property Visible;
     property Anchors;
     property Action;
+    property DragKind;
+    property DragMode;
+    property DragCursor;
+
     property OnDblClick;
+    property OnMouseActivate;
+    property OnMouseDown;
+    property OnMouseEnter;
+    property OnMouseLeave;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnMouseWheel;
+    property OnMouseWheelUp;
+    property OnMouseWheelDown;
+    property OnResize;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDock;
+    property OnEndDrag;
+    property OnStartDock;
+    property OnStartDrag;
+
     property OnClick: TNotifyEvent read fOnClick write fOnClick;
     property OnVictory: TNotifyEvent read fOnVictory write fOnVictory;
     property OnTilesMove: TNotifyEvent read fOnTilesMove write fOnTilesMove;
@@ -131,7 +151,7 @@ begin
 end;
 
 // Клик по компоненту
-procedure TMyFifteen.WMLButtonDown(var M: Tmessage);
+procedure TMyFifteen.WMLButtonDown(var Message: Tmessage);
 var
   CellCol, CellRow: integer; // координаты клетки
   x1, y1, x2, y2:integer;
@@ -161,12 +181,12 @@ begin
     y2:=(Height + FifteenHeight) div 2;
 
     //Клик произведён в области пятнашек?
-    if (M.LParamLo >= x1) and (M.LParamLo <= x2)
-    and (M.LParamHi >= y1) and (M.LParamHi <= y2) then
+    if (Message.LParamLo >= x1) and (Message.LParamLo <= x2)
+    and (Message.LParamHi >= y1) and (Message.LParamHi <= y2) then
     begin
       for ColCnt := FColCount downto 1 do
       begin
-        if M.LParamLo < x1 then Break;
+        if Message.LParamLo < x1 then Break;
         FW:=x2-x1;
         ColSize:=FW div ColCnt;
         x1:=x1+ColSize;
@@ -175,7 +195,7 @@ begin
 
       for RowCnt := FRowCount downto 1 do
       begin
-        if M.LParamHi < y1 then Break;
+        if Message.LParamHi < y1 then Break;
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
         y1:=y1+RowSize;

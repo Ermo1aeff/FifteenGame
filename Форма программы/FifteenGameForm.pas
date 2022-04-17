@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, TFifteen, StdCtrls, Menus, ExtCtrls, ComCtrls;
+  Dialogs, TFifteen, StdCtrls, Menus, ExtCtrls, ComCtrls, Grids;
 
 type
   TForm1 = class(TForm)
@@ -40,6 +40,8 @@ type
     N8: TMenuItem;
     Label2: TLabel;
     Label3: TLabel;
+    N9: TMenuItem;
+    N10: TMenuItem;
     procedure N1Click(Sender: TObject);
     procedure N2Click(Sender: TObject);
     procedure N4Click(Sender: TObject);
@@ -61,6 +63,8 @@ type
     procedure N7Click(Sender: TObject);
     procedure N8Click(Sender: TObject);
     procedure SetStart;
+    procedure N9Click(Sender: TObject);
+    procedure N10Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -122,6 +126,12 @@ begin
   MyFifteen1.FifteenColor:=RGB(11,11,150);
   ShowMessage('Вы собрали пятнашки '+IntToStr(MyFifteen1.ColCount)+
   'x'+IntToStr(MyFifteen1.RowCount)+'!');
+end;
+
+procedure TForm1.N10Click(Sender: TObject);
+begin
+  if ColorDialog1.Execute then
+    Form1.Color:= ColorDialog1.Color;
 end;
 
 procedure TForm1.N1Click(Sender: TObject);
@@ -214,6 +224,12 @@ procedure TForm1.N8Click(Sender: TObject);
 begin
   if FontDialog1.Execute then
     MyFifteen1.Font:= FontDialog1.Font;
+end;
+
+procedure TForm1.N9Click(Sender: TObject);
+begin
+  MyFifteen1.DragKind := dkDrag;
+  MyFifteen1.DragMode := dmManual;
 end;
 
 procedure TForm1.N4Click(Sender: TObject);
