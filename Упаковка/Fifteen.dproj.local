@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021.05.31 23:56:37.473.pas,C:\Users\1\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\1\Documents\RAD Studio\Projects\TFifteen.pas</Transaction>
+    <Transaction>2021.06.01 00:10:51.462.dproj,C:\Users\1\Documents\RAD Studio\Projects\Package1.dproj=C:\Users\1\Documents\RAD Studio\Projects\FifteenGame.dproj</Transaction>
+    <Transaction>2021.06.01 00:23:13.277.pas,C:\Users\1\Documents\RAD Studio\Projects\TFifteen.pas=C:\Users\1\Desktop\FifteenGame\TFifteen.pas</Transaction>
+    <Transaction>2021.06.01 00:23:15.064.dproj,C:\Users\1\Documents\RAD Studio\Projects\FifteenGame.dproj=C:\Users\1\Desktop\FifteenGame\FifteenGame.dproj</Transaction>
+    <Transaction>2021.06.02 12:24:13.641.dproj,C:\Users\1\Desktop\FifteenGame\Упаковка\FifteenGame.dproj=C:\Users\1\Desktop\FifteenGame\Упаковка\Package1.dproj</Transaction>
+    <Transaction>2022.03.15 02:50:50.526.dproj,C:\Users\1\Desktop\Курсовик оп ООП\FifteenGame\Упаковка\Package1.dproj=C:\Users\1\Desktop\Курсовик оп ООП\FifteenGame\Упаковка\Fifteen.dproj</Transaction>
+    <Transaction>2022.03.15 02:59:39.376.dproj,C:\Users\1\Desktop\Курсовик оп ООП\FifteenGame\Упаковка\Fifteen.dproj=C:\Users\1\Desktop\Курсовик оп ООП\FifteenGame\Упаковка\Package1.dproj</Transaction>
+    <Transaction>2022.03.15 03:36:13.257.dproj,C:\Users\1\Desktop\Курсовик оп ООП\FifteenGame\Упаковка\Package1.dproj=C:\Users\1\Desktop\Курсовик оп ООП\FifteenGame\Упаковка\Fifteen.dproj</Transaction>
+    <Transaction>2022.03.15 04:37:50.583.pas,C:\Users\1\Documents\RAD Studio\Projects\GraphicControl1.pas=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\GraphicControl1.pas</Transaction>
+    <Transaction>2022.03.17 02:39:40.567.pas,C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\TFifteen.pas=C:\Users\1\Desktop\Новая папка\TFifteen.pas</Transaction>
+    <Transaction>2022.03.17 02:40:49.845.pas,C:\Users\1\Desktop\Новая папка\TFifteen.pas=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\TFifteen.pas</Transaction>
+  </Transactions>
+</BorlandProject>

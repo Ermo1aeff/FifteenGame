@@ -15,10 +15,13 @@ type
     RowSize, ColSize:integer; //Размер клеток
     Field: array[0..10, 0..10] of integer;
     fOnVictory: TNotifyEvent;
+    fOnTilesMove: TNotifyEvent;
+    fOnClick: TNotifyEvent;
   protected
     procedure WMLButtonDown(var M: Tmessage); message wm_LButtonDown;
     procedure SetColCount(Value: integer); virtual;
     procedure SetRowCount(Value: integer); virtual;
+    procedure SetFifteenColor(Value: TColor); virtual;
     procedure Paint; override;
     procedure Move(CellCol, CellRow: integer); virtual;
     function Finish: boolean; virtual;
@@ -31,7 +34,7 @@ type
   published
     property ColCount:integer read FColCount write SetColCount;
     property RowCount:integer read FRowCount write SetRowCount;
-    property FifteenColor:TColor read FFifteenColor write FFifteenColor;
+    property FifteenColor:TColor read FFifteenColor write SetFifteenColor;
     property OnMouseMove;
     property Align;
     property Color;
@@ -39,6 +42,7 @@ type
     property Enabled;
     property Font;
     property ParentFont;
+    property Hint;
     property ParentShowHint;
     property PopupMenu;
     property ShowHint;
@@ -46,7 +50,9 @@ type
     property Anchors;
     property Action;
     property OnDblClick;
+    property OnClick: TNotifyEvent read fOnClick write fOnClick;
     property OnVictory: TNotifyEvent read fOnVictory write fOnVictory;
+    property OnTilesMove: TNotifyEvent read fOnTilesMove write fOnTilesMove;
 end;
 
 procedure Register;
@@ -78,6 +84,15 @@ begin
   begin
     FColCount:=Value;
     Filler;
+    Refresh;
+  end;
+end;
+
+procedure TMyFifteen.SetFifteenColor(Value: TColor);
+begin
+  if (FFifteenColor <> Value) then
+  begin
+    FFifteenColor:=Value;
     Refresh;
   end;
 end;
@@ -124,6 +139,9 @@ var
   FifteenWidth, FifteenHeight: integer;
   FW, FH: integer;
 begin
+  if Assigned(fOnClick) then   //Нажатие
+      fOnClick(self);
+
   if not(Finish) then  //Проверка сбора пятнашек
   begin
     // преобразование координаты мыши в координаты клетки
@@ -173,18 +191,22 @@ procedure TMyFifteen.Move(CellCol,CellRow: integer);
 begin
   // Проверка возможности обмена
   // Если обмен невозможен, то осуществляется выход из процедуры
-  if not ((abs(CellCol-EmptCol) = 1) and (CellRow-EmptRow = 0)
-  or (abs(CellRow-EmptRow) = 1) and (CellCol-EmptCol = 0)) then exit;
-  // Если обмен возможен меняем костяшку и пустую клетку местами
-  // Обмен. Переместим костяшку из CellRow, CellCol в EmptRow, EmptCol
-  Field[EmptRow,EmptCol] := Field[CellRow,CellCol];
-  Field[CellRow,CellCol] := 0;
-  EmptCol:=CellCol;
-  EmptRow:=CellRow;
-  Paint;  // отрисовать поле
-  if Finish then
-    if Assigned(fOnVictory) then
-      fOnVictory(self);
+  if (abs(CellCol-EmptCol) = 1) and (CellRow-EmptRow = 0)
+  or (abs(CellRow-EmptRow) = 1) and (CellCol-EmptCol = 0) then
+  begin
+    // Если обмен возможен меняем костяшку и пустую клетку местами
+    // Обмен. Переместим костяшку из CellRow, CellCol в EmptRow, EmptCol
+    Field[EmptRow,EmptCol] := Field[CellRow,CellCol];
+    Field[CellRow,CellCol] := 0;
+    EmptCol:=CellCol;
+    EmptRow:=CellRow;
+    Paint;  // отрисовать поле
+    if Assigned(fOnTilesMove) then   //Сдвиг
+      fOnTilesMove(self);
+    if Finish then
+      if Assigned(fOnVictory) then  //Победа
+        fOnVictory(self);
+  end;
 end;
 
 // проверка рассположения костяшек в нужном порядке
@@ -236,11 +258,9 @@ begin
     Image.Height:= Height;
     Image.Canvas.Font.Name:=Font.Name;
     Image.Canvas.Font.Style:=Font.Style;
+    Image.Canvas.Font.Color:=Font.Color;
     with Image.Canvas do
     begin
-      if ParentColor then
-        Brush.Color:=Parent.Brush.Color;
-
       // Закрашивание компонента (фона) под цвет формы
       Brush.Color:=Color;
       FillRect(ClientRect);
@@ -273,9 +293,9 @@ begin
         ColSize:=FW div ColCnt;
         MoveTo(x1, y1);
         LineTo(x1, y2);
-        MoveTo(x1+ColSize-1, y1);
-        LineTo(x1+ColSize-1, y2);
         x1:=x1+ColSize;
+        MoveTo(x1-1, y1);
+        LineTo(x1-1, y2);
       end;
 
       // сетка: горизонтальные линии
@@ -286,9 +306,9 @@ begin
         RowSize:=FH div RowCnt;
         MoveTo(x1, y1);
         LineTo(x2, y1);
-        MoveTo(x1, y1+RowSize-1);
-        LineTo(x2, y1+RowSize-1);
         y1:=y1+RowSize;
+        MoveTo(x1, y1-1);
+        LineTo(x2, y1-1);
       end;
 
       //Отрисовка содержимго клеток
