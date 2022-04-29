@@ -65,6 +65,16 @@ type
     procedure SetStart;
     procedure N9Click(Sender: TObject);
     procedure N10Click(Sender: TObject);
+    procedure MyFifteen1MouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure MyFifteen1MouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure MyFifteen1MouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
   private
     { Private declarations }
   public
@@ -101,6 +111,41 @@ end;
 procedure TForm1.FormClick(Sender: TObject);
 begin
   ShowMessage('Click on form');
+end;
+
+procedure TForm1.FormMouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  MyFifteen1.ColCount:=MyFifteen1.ColCount+1;
+  MyFifteen1.RowCount:=MyFifteen1.RowCount+1;
+end;
+
+procedure TForm1.FormMouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  MyFifteen1.ColCount:=MyFifteen1.ColCount-1;
+  MyFifteen1.RowCount:=MyFifteen1.RowCount-1;
+end;
+
+procedure TForm1.MyFifteen1MouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+  MyFifteen1.ColCount:=MyFifteen1.ColCount+1;
+  MyFifteen1.RowCount:=MyFifteen1.RowCount+1;
+end;
+
+procedure TForm1.MyFifteen1MouseWheelDown(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  MyFifteen1.ColCount:=MyFifteen1.ColCount+1;
+  MyFifteen1.RowCount:=MyFifteen1.RowCount+1;
+end;
+
+procedure TForm1.MyFifteen1MouseWheelUp(Sender: TObject; Shift: TShiftState;
+  MousePos: TPoint; var Handled: Boolean);
+begin
+  MyFifteen1.ColCount:=MyFifteen1.ColCount-1;
+  MyFifteen1.RowCount:=MyFifteen1.RowCount-1;
 end;
 
 procedure TForm1.MyFifteen1TilesMove(Sender: TObject);

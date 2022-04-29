@@ -13,7 +13,7 @@ type
     FRowCount, FColCount:integer; // размер поля
     EmptCol, EmptRow:integer; // координаты пустой клетки
     RowSize, ColSize:integer; //Размер клеток
-    Field: array[0..10, 0..10] of integer;
+    Field: array[0..11, 0..11] of integer;
     fOnVictory: TNotifyEvent;
     fOnTilesMove: TNotifyEvent;
     fOnClick: TNotifyEvent;
@@ -97,8 +97,8 @@ begin
   if (Value < 3) then
     Value:=3
   else
-    if (Value > 5) then
-      Value:=5;
+    if (Value > 10) then
+      Value:=10;
       
   if (value <> FColCount) then
   begin
@@ -122,8 +122,8 @@ begin
   if (Value < 3) then
     Value:=3
   else
-    if (Value > 5) then
-      Value:=5;
+    if (Value > 10) then
+      Value:=10;
 
   if (value <> FRowCount) then
   begin
@@ -271,6 +271,12 @@ var
   ColCnt, RowCnt :integer;  // Кол-во клеток по верикали и горизонтали
   FifteenWidth, FifteenHeight: integer; //Размер пятнашек Константы
   FW, FH: integer; // Размер пятнашек Изменяемые переменные
+  TxtWidth, TxtHeight:integer; //Ширина текста
+  Numbers:string;
+  MaxNumWidth:string; //Самый широкий символ
+  Num:integer;
+  NumCount:string;    //Кол-во символов
+  Proportion:real;
 begin
   Image:= TBitmap.Create;
   try
@@ -296,7 +302,7 @@ begin
         FifteenHeight:=Trunc(Width / FColCount * FRowCount);
       end;
 
-      // Нахождение координат по которым будут описываться пятнашки
+      // Определение координат по которым будут описываться пятнашки
       x1:=(Width - FifteenWidth) div 2;
       y1:=(Height - FifteenHeight) div 2;
       x2:=(Width + FifteenWidth) div 2;
@@ -335,13 +341,39 @@ begin
       Brush.Style:=bsClear;    //Прозрачный фон
       i:=0;
       y1:=(Height - FifteenHeight) div 2;
+
+      FH:=y2-y1;
+      RowSize:=FH div FRowCount;
+      Font.Height:=RowSize-2;
+
+      // Определение макс. широкого числа
+      Numbers:='123456789';
+      MaxNumWidth:='0';
+      for num := 1 to Length(numbers)	do
+      begin
+        if (TextWidth(numbers[num]) > TextWidth(MaxNumWidth)) then
+          MaxNumWidth:=numbers[num];
+      end;
+      
+      // Определение кол-ва символов в клетке
+      for num := 0 to Length(IntToStr(FRowCount*FColCount - 1)) do
+      begin
+        numCount:=numCount+MaxNumWidth;
+      end;
+
+      // Изменение шрифта под ширину клетки методом пропорций
+      TxtHeight:=TextHeight(numCount);
+      TxtWidth:=TextWidth(numCount);
+      Proportion:=TxtWidth/TxtHeight;
+      Font.Height:=Round(ColSize/Proportion);
+
       for RowCnt := FRowCount downto 1 do
       begin
         FH:=y2-y1;
         RowSize:=FH div RowCnt;
         x1:=(Width - FifteenWidth) div 2; //Восстанавление коориднаты нач. пятн.
         j:=0;
-        Font.Height:=RowSize-2;
+
         y:=y1 + (RowSize - TextHeight(IntToStr(Field[i,j]))) div 2;
         for ColCnt := FColCount downto 1 do
         begin
