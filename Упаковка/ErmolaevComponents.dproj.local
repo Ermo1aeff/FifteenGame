@@ -12,5 +12,10 @@
     <Transaction>2022.03.15 04:37:50.583.pas,C:\Users\1\Documents\RAD Studio\Projects\GraphicControl1.pas=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\GraphicControl1.pas</Transaction>
     <Transaction>2022.03.17 02:39:40.567.pas,C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\TFifteen.pas=C:\Users\1\Desktop\Новая папка\TFifteen.pas</Transaction>
     <Transaction>2022.03.17 02:40:49.845.pas,C:\Users\1\Desktop\Новая папка\TFifteen.pas=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\TFifteen.pas</Transaction>
+    <Transaction>2022.05.02 19:09:40.421.pas,C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\TFifteen.pas=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\ErmolaevComonents.pas</Transaction>
+    <Transaction>2022.05.02 19:35:17.867.dproj,C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\Fifteen.dproj=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\ErmolaevComponents.dproj</Transaction>
+    <Transaction>2022.05.02 19:35:24.666.pas,C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\ErmolaevComonents.pas=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\Fifteen.pas</Transaction>
+    <Transaction>2022.05.03 02:28:32.003.dproj,C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\ErmolaevComponents.dproj=C:\Users\1\Desktop\Новая папка\ErmolaevComponents.dproj</Transaction>
+    <Transaction>2022.05.03 02:29:12.798.dproj,C:\Users\1\Desktop\Новая папка\ErmolaevComponents.dproj=C:\Users\1\Desktop\Курсовой проект по ООП\FifteenGame\Упаковка\ErmolaevComponents.dproj</Transaction>
   </Transactions>
 </BorlandProject>

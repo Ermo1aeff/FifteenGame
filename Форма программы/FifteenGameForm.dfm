@@ -6,8 +6,8 @@ object Form1: TForm1
   Margins.Right = 4
   Margins.Bottom = 4
   Caption = #1055#1103#1090#1085#1072#1096#1082#1080
-  ClientHeight = 420
-  ClientWidth = 536
+  ClientHeight = 637
+  ClientWidth = 608
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -152,54 +152,77 @@ object Form1: TForm1
   Menu = MainMenu1
   OldCreateOrder = False
   Position = poDesigned
-  OnMouseWheelDown = FormMouseWheelDown
-  OnMouseWheelUp = FormMouseWheelUp
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object MyFifteen1: TMyFifteen
+  object Fifteen1: TFifteen
     Left = 0
-    Top = 27
-    Width = 536
-    Height = 393
+    Top = 26
+    Width = 608
+    Height = 611
     ColCount = 4
     RowCount = 4
-    FifteenColor = clMenuHighlight
+    FifteenColor = clHighlight
+    LinesColor = clBlack
     Align = alClient
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Vertigo Upright 2 BRK'
-    Font.Style = [fsBold, fsItalic]
-    ParentFont = False
-    ParentShowHint = False
-    PopupMenu = PopupMenu1
-    ShowHint = True
-    OnMouseWheel = MyFifteen1MouseWheel
-    OnMouseWheelUp = MyFifteen1MouseWheelUp
-    OnMouseWheelDown = MyFifteen1MouseWheelDown
-    OnVictory = MyFifteen1Victory
-    OnTilesMove = MyFifteen1TilesMove
-    ExplicitTop = 67
+    OnVictory = Fifteen1Victory
+    OnTilesMove = Fifteen1TilesMove
+    ExplicitLeft = -8
   end
   object ControlBar1: TControlBar
     Left = 0
     Top = 0
-    Width = 536
-    Height = 27
+    Width = 608
+    Height = 26
     Align = alTop
+    AutoSize = True
+    BevelEdges = []
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    BevelKind = bkNone
+    GradientDirection = gdHorizontal
     GradientEndColor = clGreen
     GradientStartColor = clBlue
     TabOrder = 0
-    object Panel1: TPanel
-      Left = 11
+    object Panel2: TPanel
+      Left = 302
       Top = 2
-      Width = 289
+      Width = 146
       Height = 22
-      Align = alRight
+      AutoSize = True
+      BevelOuter = bvNone
       ParentColor = True
       TabOrder = 0
+      object Label9: TLabel
+        Left = 0
+        Top = 4
+        Width = 40
+        Height = 13
+        Caption = #1064#1080#1088#1080#1085#1072
+      end
+      object TrackBar1: TTrackBar
+        Left = 46
+        Top = 0
+        Width = 100
+        Height = 22
+        Min = 3
+        Position = 3
+        TabOrder = 0
+        OnChange = TrackBar1Change
+      end
+    end
+    object Panel3: TPanel
+      Left = 11
+      Top = 2
+      Width = 278
+      Height = 22
+      Align = alRight
+      BevelEdges = []
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 1
       object Label1: TLabel
-        Left = 8
+        Left = 0
         Top = 2
         Width = 48
         Height = 16
@@ -212,8 +235,8 @@ object Form1: TForm1
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 128
-        Top = 3
+        Left = 114
+        Top = 2
         Width = 45
         Height = 16
         Caption = #1061#1054#1044#1067' -'
@@ -225,7 +248,7 @@ object Form1: TForm1
         ParentFont = False
       end
       object Label3: TLabel
-        Left = 216
+        Left = 208
         Top = 3
         Width = 4
         Height = 16
@@ -235,6 +258,33 @@ object Form1: TForm1
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+      end
+    end
+    object Panel1: TPanel
+      Left = 461
+      Top = 2
+      Width = 147
+      Height = 22
+      AutoSize = True
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 2
+      object Label10: TLabel
+        Left = 0
+        Top = 4
+        Width = 37
+        Height = 13
+        Caption = #1042#1099#1089#1086#1090#1072
+      end
+      object TrackBar2: TTrackBar
+        Left = 47
+        Top = 0
+        Width = 100
+        Height = 22
+        Min = 3
+        Position = 3
+        TabOrder = 0
+        OnChange = TrackBar2Change
       end
     end
   end
@@ -313,6 +363,10 @@ object Form1: TForm1
       object N10: TMenuItem
         Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1094#1074#1077#1090' '#1092#1086#1085#1072
         OnClick = N10Click
+      end
+      object N11: TMenuItem
+        Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1094#1074#1077#1090' '#1083#1080#1085#1080#1081
+        OnClick = N11Click
       end
     end
     object N4: TMenuItem

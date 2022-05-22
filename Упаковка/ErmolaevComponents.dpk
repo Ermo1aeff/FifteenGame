@@ -1,4 +1,4 @@
-package Fifteen;
+package ErmolaevComponents;
                                                                                        
 {$R *.res}
 {$ALIGN 8}
@@ -29,6 +29,6 @@ requires
   vcl;
 
 contains
-  TFifteen in 'TFifteen.pas';
+  Fifteen in 'Fifteen.pas';
 
 end.
